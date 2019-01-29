@@ -2,17 +2,15 @@
 var cheerio = require('cheerio');
 var request = require('request');
 var url = 'https://www.relaischateaux.com/fr/site-map/etablissements';
-
+var url1="https://restaurant.michelin.fr/magazine/les-restaurants-etoiles-du-guide-michelin-2019";
 var Frenchlist = [{
     'restaurant': '',
     'chef': '',
     'hote': '',
   }];
-
+/*
 request(url, function(err, resp, body) {
     var $ = cheerio.load(body);
-
-
     $("#countryF").each(function(i){
         console.log('pays : ', $(this).find("h3").text());
         console.log("iteration - ", i);
@@ -30,17 +28,12 @@ request(url, function(err, resp, body) {
     })
 });
 
+*/
+request(url1,function(err,resp,body){
+var $=cheerio.load(body);
+console.log($(".field field--name-body field--type-text-with-summury field--label-hidden").children().children()._root.children());//.each(function(i){
+//console.log(i);
 
 
-/*
-if(k == 0){
-    var elt = $("a:first");
-    console.log(elt);
-}
-
-if(k == 1){
-    Frenchlist[j].chef = $(this)('li').html();
-}
-if(k == 2){
-    Frenchlist[j].Host = $(this)('li').html();
-}*/
+//});
+});
