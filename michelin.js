@@ -25,13 +25,6 @@ function max(a,b){
     }
   }
 }
-console.log(url);
-
-var listeRestaurants = [{
-    'restaurant': '',
-    'isstarred': '', 
-    'price': ''
-}];
 
 var p1 = new Promise(function(resolve, reject) {
 request(url,function(err,resp,body){
@@ -42,24 +35,19 @@ request(url,function(err,resp,body){
     if(max(page, $(this).text()) == parseInt($(this).text())){
       page = parseInt($(this).text());
     }
-    console.log('token retenu : ' + page);
   })
   resolve(page);
 });
 });
 p1.then((page)=>{
+var urlparpage="";
 for(var i = 1; i < page + 1; i++){
-  var urlparpage = url + '/page-'+ i.toString();
-  console.log(urlparpage);
+  urlparpage = url + '/page-'+ i.toString();
 
   request(urlparpage,function(err,resp,body){
     var $=cheerio.load(body);
-
-    //on récupère le nom des restaurants d'une page
     $(".poi_card-display-title").each(function(i){
-
-      console.log('restaurant numero : ', i + 1);
-      console.log($(this).text(), '\n \n');
+      	console.log($(this).text().trim());
     })
     });
 }
