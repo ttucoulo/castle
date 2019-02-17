@@ -31,7 +31,6 @@ var p1 = new Promise(function(resolve, reject) {
 request(url,function(err,resp,body){
   var $=cheerio.load(body);
   var page = -1;
-  //on récupère le nom des restaurants d'une page
   $(".mr-pager-item").each(function(i){
     if(max(page, $(this).text()) == parseInt($(this).text())){
       page = parseInt($(this).text());
@@ -49,7 +48,6 @@ for(var i = 1; i < page + 1; i++){
   request(urlparpage,function(err,resp,body){
     var $=cheerio.load(body);
     $(".poi_card-display-title").each(function(i){
-      	//console.log($(this).text().trim());
 	array.push({ "restaurant": $(this).text().trim()});
     })
 	var restauMichelin=JSON.stringify(array);
