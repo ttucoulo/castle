@@ -1,5 +1,6 @@
 var cheerio = require('cheerio');
 var request = require('request');
+var fs = require('fs');
 
 var url = '';
 
@@ -40,6 +41,7 @@ request(url,function(err,resp,body){
 });
 });
 p1.then((page)=>{
+var array=[];
 var urlparpage="";
 for(var i = 1; i < page + 1; i++){
   urlparpage = url + '/page-'+ i.toString();
@@ -47,8 +49,13 @@ for(var i = 1; i < page + 1; i++){
   request(urlparpage,function(err,resp,body){
     var $=cheerio.load(body);
     $(".poi_card-display-title").each(function(i){
-      	console.log($(this).text().trim());
+      	//console.log($(this).text().trim());
+	array.push({ "restaurant": $(this).text().trim()});
     })
+	var restauMichelin=JSON.stringify(array);
+	fs.writeFile("michelinRestau.json",restauMichelin, function doneWriting(err){
+		if(err) console.error(err);
+	});
     });
 }
 });
