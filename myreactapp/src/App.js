@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ReactTable from "react-table"
 import "react-table/react-table.css"
+import myData from './MixJson.json';
 
 class App extends Component {
 
@@ -15,26 +15,19 @@ class App extends Component {
 
   }
 
-  componentDidMount(){
-  	const url="https://jsonplaceholder.typicode.com/posts";
-  	fetch(url,{method:"GET"}).then(response =>response.json()).then(posts=>{
-		this.setState({posts:posts});
-        })
-  }
-
   render() { 
 	const columns=[
 		{
 			Header:"Hotel name",
-			accessor:"hotel Name "
+			accessor:"hotelName"
 		},
 		{
 			Header :"Price",
-			accessor:"hotel Price"
+			accessor:"hotelPrice"
 		},
 		{
 			Header:"Link for reservation",
-			accessor:"Link for Reservation"
+			accessor:"LinkforReservation"
 		}
 	]
 
@@ -44,7 +37,7 @@ class App extends Component {
 	
 
 <ReactTable columns={columns}
-	data={this.state.posts}>
+	data={myData}>
 </ReactTable>
 
     );
