@@ -18,9 +18,8 @@ request(url, function(err, resp, body) {
 		link=$(this).children().first().filter("a").attr("href").trim();
 		chef=$(this).children().first().next().filter("a").text().trim();
 		request(link, function(err, resp, body) {
-			var $$=cheerio.load(body);
-			if(String($$(".priceTag").children().children().first().attr("class"))!="priceLabel"){
-				price=$$(".price").text();
+			if(String($(".priceTag").children().children().first().attr("class"))!="priceLabel"){
+				price=$(".price").text();
 			}
 		});
 		array.push({ "name": name,"chef": chef,"link":link, "restaurant ": "blabla" ,"price":price });
@@ -46,6 +45,6 @@ var json3=[];
 	}
 }
 
-console.log(json3);
+//console.log(json3);
 fs.writeFileSync("MixJson",JSON.stringify(json3));
 
